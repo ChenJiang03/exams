@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.exam.mapper.TestStudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.exam.entity.TestStudent">
+        <id column="id" property="id" />
+        <result column="paper_id" property="paperId" />
+        <result column="test_id" property="testId" />
+        <result column="student_id" property="studentId" />
+        <result column="teacher_id" property="teacherId" />
+        <result column="is_completed" property="isCompleted" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, paper_id, test_id, student_id, teacher_id, is_completed, enable
+    </sql>
+
+</mapper>

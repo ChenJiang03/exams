@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.exam.mapper.StudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.exam.entity.Student">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="name" property="name" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="pic" property="pic" />
+        <result column="sex" property="sex" />
+        <result column="idcard" property="idcard" />
+        <result column="degree" property="degree" />
+        <result column="class_id" property="classId" />
+        <result column="reg_time" property="regTime" />
+        <result column="last_login" property="lastLogin" />
+        <result column="is_graduate" property="isGraduate" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, name, phone, email, pic, sex, idcard, degree, class_id, reg_time, last_login, is_graduate, enable
+    </sql>
+
+</mapper>

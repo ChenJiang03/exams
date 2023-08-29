@@ -15,7 +15,7 @@ public class MpGenerator {
         String projectPath = System.getProperty("user.dir");//获取idea的工作目录
         String outputDir = projectPath + "/src/main/java";
         String mapperxmlPath = projectPath+"/src/main/resources/mapper/";
-        FastAutoGenerator.create(url, "root", "wanmait")
+        FastAutoGenerator.create(url, "wm230401user3", "Wanmait@N7dhC9")
                 .globalConfig(builder -> {
                     builder.author("wanmait") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式

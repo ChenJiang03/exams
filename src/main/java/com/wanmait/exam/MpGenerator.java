@@ -11,7 +11,7 @@ public class MpGenerator {
 
 
     public static void main(String[] args) throws InterruptedException {
-        String url = "jdbc:mysql://localhost:3306/exam?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+        String url = "jdbc:mysql://localhost:3306/wanmait230401_db3?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
         String projectPath = System.getProperty("user.dir");//获取idea的工作目录
         String outputDir = projectPath + "/src/main/java";
         String mapperxmlPath = projectPath+"/src/main/resources/mapper/";

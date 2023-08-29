@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import login from "@/views/admin/login";
+import login from "@/views/login";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/admin/login',
+    path: '/',
     name: 'login',
     component: login
   },
@@ -20,11 +20,7 @@ const routes = [
     name: 'index',
     component: () => import('../views/student/index')
   },
-  {
-    path: '/',
-    name: 'stuLogin',
-    component: () => import('../views/stuLogin')
-  },
+
 
 ]
 

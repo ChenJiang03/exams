@@ -97,7 +97,7 @@
         width: 100%;
         overflow-y: auto;
         height: 100%;
-        background: url('../../assets/background.svg') center top / cover no-repeat;
+        background: url('../assets/background.svg') center top / cover no-repeat;
         background-size: cover;
         background-color: #fff !important;
     }

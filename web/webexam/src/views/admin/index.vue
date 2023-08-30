@@ -18,7 +18,7 @@
     import mainLeft from '@/components/common/mainLeft'
     import navigator from '@/components/common/navigator'
     export default {
-        name: "index",
+        name: 'index',
         components:{
             header1: header,
             mainLeft: mainLeft,

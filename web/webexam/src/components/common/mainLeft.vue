@@ -15,7 +15,8 @@
       <el-submenu v-for="(item,index) in menu" :index='item.index' :key="index">
         <template slot="title">
           <div class="left-width">
-            <i class="iconfont" :class="item.icon"></i>
+            <i class="iconfont"></i>
+<!--            :class="item.icon"-->
             <span slot="title" class="title">{{item.title}}</span>
           </div>
         </template>
@@ -35,7 +36,12 @@ export default {
   name: "mainLeft",
   data() {
     return {
+      menu: [
+        {title:'教师灌流',icon:'',content:{item1:''}},
+        {title:'试卷管理',icon:'',content:{item2:''}},
+        {title:'学生管理',icon:'',content:{item3:''}},
 
+      ],
     }
   },
 

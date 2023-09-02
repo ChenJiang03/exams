@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from "@/views/login";
-
+import teacherroutes from "./teacher"
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,9 +16,10 @@ const routes = [
   },
 
   {
-    path: '/admin/index',
+    path: '/admin',
     component: () => import('../views/admin/index')
   },
+  teacherroutes,
   {
     path: '/student/index',
     component: () => import('../views/student/index')

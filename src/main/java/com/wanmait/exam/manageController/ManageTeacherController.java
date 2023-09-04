@@ -42,8 +42,9 @@ public class ManageTeacherController {
     }
 
     @GetMapping("select")
-    public AjaxResult selectById(Integer id){
-        return AjaxResult.success(teacherService.getById(id));
+    public AjaxResult selectById(String id){
+        int newId = Integer.parseInt(id);
+        return AjaxResult.success(teacherService.getById(newId));
     }
 
     @PostMapping("update")

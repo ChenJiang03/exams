@@ -7,6 +7,7 @@ const routes=
         {
             path: '/admin/teacher',
             component:index,
+            name:'index',
             children:[
                 {
                     path: 'list',

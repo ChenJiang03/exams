@@ -15,5 +15,14 @@
     <sql id="Base_Column_List">
         id, level, score, update_time, enable
     </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from levels where enable=1;
+    </select>
+    <insert id="add" >
+        insert into levels(level,score) value (#{level},#{score})
+    </insert>
+    <update id="update">
+        update levels set level=#{level},score=#{score} where id=#{id}
+    </update>
 
 </mapper>

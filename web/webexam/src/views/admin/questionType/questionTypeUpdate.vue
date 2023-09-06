@@ -40,14 +40,14 @@
         },
         methods:{
             getQuestionType(id){
-                this.$axios.get("http://localhost:8081/manage/questionType/findById",{params:{id:id}}).then(res=>{
+                this.$axios.get("manage/questionType/findById",{params:{id:id}}).then(res=>{
                     this.questionType = res.data.data;
                 })
             },
             submitForm(){
                 this.$refs.questionTypeForm.validate((valid) => {
                     if (valid) {
-                        this.$axios.post("http://localhost:8081/manage/questionType/update",this.questionType).then(res=>{
+                        this.$axios.post("manage/questionType/update",this.questionType).then(res=>{
                                 this.$router.push("/admin/questionType/list");
                             }
                         )

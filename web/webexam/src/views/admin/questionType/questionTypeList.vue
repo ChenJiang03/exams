@@ -26,7 +26,7 @@
         },
         methods:{
             initData(){
-                this.$axios.get("http://localhost:8081/manage/questionType/list").then(res=>{
+                this.$axios.get("manage/questionType/list").then(res=>{
                     console.log(res)
                     this.questionTypes = res.data.data;
                 })
@@ -37,7 +37,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(()=>{
-                    this.$axios.get("http://localhost:8081/manage/questionType/delete",{params:{id:id}}).then(()=>{
+                    this.$axios.get("manage/questionType/delete",{params:{id:id}}).then(()=>{
                         this.initData();
                     })
 

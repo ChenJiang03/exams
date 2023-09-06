@@ -37,9 +37,9 @@ export default {
   data() {
     return {
       menu: [
-        {title:'教师管理',icon:'',index:'1',content:[{item1:'教师列表',path:"/admin/teacher/list"},{item2:'添加教师',path:"/admin/teacher/add"}]},
-        {title:'试卷管理',icon:'',index:'2',content:{item2:''}},
-        {title:'学生管理',icon:'',index:'3',content:{item3:''}},
+        {title:'教师管理',index:'1',content:[{item1:'教师列表',path:"/admin/teacher/list"},{item2:'添加教师',path:"/admin/teacher/add"}]},
+        {title:'试卷管理',index:'2',content:{item2:''}},
+        {title:'学生管理',index:'3',content:{item3:''}},
 
       ],
     }

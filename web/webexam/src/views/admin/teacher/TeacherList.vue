@@ -42,7 +42,7 @@
                 this.$router.push({path:"/admin/teacher/update",query: { id: id }});
             },
             handleList(){
-                this.$axios.get("http://localhost:8081/manage/teacher/list")
+                this.$axios.get("manage/teacher/list")
                     .then(res=>{
                         this.teachers = res.data.data;
                     });
@@ -55,7 +55,7 @@
                     type: 'warning'
                 }).then(() => {
                     this.teachers.splice(index,1);
-                    this.$axios.post("http://localhost:8081/manage/teacher/delete?id="+teacherId).then(res=>{
+                    this.$axios.post("manage/teacher/delete?id="+teacherId).then(res=>{
                         this.handleList();
                     })
                 }).catch(() => {

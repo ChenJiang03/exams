@@ -69,7 +69,7 @@
             submitForm() {
                 this.$refs.teacherForm.validate((valid) => {
                     if (valid) {
-                        this.$axios.post("http://localhost:8081/manage/teacher/add",this.teacher).then(res=>{
+                        this.$axios.post("manage/teacher/add",this.teacher).then(res=>{
                                 this.$router.push("/admin/teacher/list");
                             }
                         )

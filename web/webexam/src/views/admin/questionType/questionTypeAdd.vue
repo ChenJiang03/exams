@@ -35,7 +35,7 @@
             submitForm() {
                 this.$refs.questionTypeForm.validate((valid) => {
                     if (valid) {
-                        this.$axios.post("http://localhost:8081/manage/questionType/add",this.questionType).then(res=>{
+                        this.$axios.post("manage/questionType/add",this.questionType).then(res=>{
                                 this.$router.push("/admin/questionType/list");
                             }
                         )

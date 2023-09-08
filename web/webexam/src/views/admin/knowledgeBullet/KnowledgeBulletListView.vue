@@ -12,7 +12,7 @@
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleUpdate(scope.$index)">修改</el-button>
+          <el-button @click="handleUpdate(scope.row.id)">修改</el-button>
           <el-button @click="handleDelete(scope.$index)">删除</el-button>
         </template>
       </el-table-column>
@@ -69,6 +69,10 @@
         }).catch(() => {
         });
 
+      },
+      handleUpdate(id) {
+        // console.log(id);
+        this.$router.push("/admin/knowledgeBullet/update?id=" + id);
       }
     }
   }

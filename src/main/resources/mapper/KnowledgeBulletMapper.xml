@@ -9,11 +9,22 @@
         <result column="subject_id" property="subjectId" />
         <result column="update_time" property="updateTime" />
         <result column="enable" property="enable" />
+        <association property="subject" javaType="com.wanmait.exam.entity.Subject">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="subject_title" property="title" jdbcType="VARCHAR" />
+            <result column="enable" property="enable" />
+        </association>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, knowledge_point, subject_id, update_time, enable
+        knowledge_bullet.id, knowledge_point, subject_id, update_time, knowledge_bullet.enable
     </sql>
+    <select id="selectList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />, subject.id, subject.title subject_title, subject.enable from knowledge_bullet
+        left join subject on knowledge_bullet.subject_id = subject.id
+        where knowledge_bullet.enable = 1 and subject.enable = 1
+        order by knowledge_bullet.id asc
+    </select>
 
 </mapper>

@@ -9,7 +9,7 @@
             <el-table-column prop="name" label="姓名" ></el-table-column>
             <el-table-column label="头像" >
                 <template slot-scope="scope">
-                    <img :src="'http://localhost:8081/static/uploadImages/'+scope.row.pic" style="max-width: 100px">
+                    <img :src="$baseURL+'static/uploadImages/'+scope.row.pic" style="max-width: 100px">
                 </template>
             </el-table-column>
             <el-table-column prop="questionCount" label="出题数量" ></el-table-column>
@@ -67,7 +67,5 @@
 </script>
 
 <style scoped>
-h1{
-    margin-left: 600px;
-}
+
 </style>

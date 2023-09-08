@@ -20,5 +20,8 @@
     <sql id="Base_Column_List">
         id, username, password, name, idcard, sex, pic, input_time, question_count, enable
     </sql>
+    <select id="findByUsernameAndPassword" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from teacher where username=#{username} and password=#{password} and enable=1
+    </select>
 
 </mapper>

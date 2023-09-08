@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2023-08-29
  */
 public interface ModelMapper extends BaseMapper<Model> {
-
+//    String selectList();
 }

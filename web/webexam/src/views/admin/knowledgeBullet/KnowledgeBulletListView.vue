@@ -56,8 +56,10 @@
           type: 'warning'
         }).then(() => {
           console.log(111);
+          console.log(index);
+          console.log(this.pageInfo.list[index].id);
 
-          this.$axios.get("manage/knowledgeBullet/delete", {params: {id: this.knowledgeList[index].id}})
+          this.$axios.get("manage/knowledgeBullet/delete", {params: {id: this.pageInfo.list[index].id}})
               .then(res => {
                 console.log(res);
                 console.log(2222222222);

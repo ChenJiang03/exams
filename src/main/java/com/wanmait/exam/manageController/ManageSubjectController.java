@@ -1,22 +1,49 @@
 package com.wanmait.exam.manageController;
 
+import com.wanmait.exam.entity.Levels;
+import com.wanmait.exam.entity.Subject;
 import com.wanmait.exam.service.SubjectService;
 import com.wanmait.exam.util.AjaxResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
-@RequestMapping("/manage/subject")
-public class ManageSubjectController
-{
+@RequestMapping("manage/subject")
+public class ManageSubjectController {
     @Resource
-    private SubjectService subjectService;
+    SubjectService subjectService;
 
     @GetMapping("list")
-    public AjaxResult selectList() {
-        return AjaxResult.success(this.subjectService.list());
+    public AjaxResult subjectList(){
+        List<Subject> subjectList=subjectService.list();
+        return AjaxResult.success(subjectList);
     }
+
+    @GetMapping("update")
+    public AjaxResult updateInfo(Integer id){
+        Subject subject=subjectService.getById(id);
+        return AjaxResult.success(subject);
+    }
+
+    @PostMapping("update")
+    public AjaxResult update(@RequestBody Subject subject){
+        subjectService.updateById(subject);
+        return AjaxResult.success("修改完成");
+    }
+
+    @PostMapping("delete")
+    public AjaxResult delete(Integer id){
+        subjectService.removeById(id);
+        return AjaxResult.success("删除完成");
+    }
+
+    @PostMapping("add")
+    public AjaxResult add(@RequestBody Subject subject){
+        subjectService.save(subject);
+        return AjaxResult.success("添加完成");
+    }
+
 }

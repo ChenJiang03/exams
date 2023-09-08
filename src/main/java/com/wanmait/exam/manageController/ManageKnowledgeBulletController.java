@@ -3,10 +3,7 @@ package com.wanmait.exam.manageController;
 import com.wanmait.exam.entity.KnowledgeBullet;
 import com.wanmait.exam.service.KnowledgeBulletService;
 import com.wanmait.exam.util.AjaxResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -36,6 +33,12 @@ public class ManageKnowledgeBulletController
     @GetMapping("select")
     public AjaxResult selectById(Integer id) {
         return AjaxResult.success(this.knowledgeBulletService.getById(id));
+    }
+
+    @PostMapping("add")
+    public AjaxResult add(@RequestBody KnowledgeBullet knowledgeBullet) {
+        this.knowledgeBulletService.save(knowledgeBullet);
+        return AjaxResult.success("添加成功");
     }
 
     @GetMapping("delete")

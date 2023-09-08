@@ -14,5 +14,8 @@
     <sql id="Base_Column_List">
         id, title, description, enable
     </sql>
+<!--    <select id="selectList" resultType="java.lang.String">-->
+<!--        select <include refid="Base_Column_List"></include>,paper_model.-->
+<!--    </select>-->
 
 </mapper>

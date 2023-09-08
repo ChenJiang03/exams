@@ -9,15 +9,15 @@
                 <div class="bottom">
                     <div class="container">
                         <p class="title">教师登录</p>
-                        <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" @keyup.enter.native="login()">
+                        <el-form :label-position="labelPosition" label-width="80px" :model="teacher" :rules="rules" ref="loginForm" @keyup.enter.native="login()">
                             <el-form-item label="用户名">
-                                <el-input v-model.number="formLabelAlign.username" placeholder="请输入用户名"></el-input>
+                                <el-input v-model.number="teacher.username" placeholder="请输入用户名"></el-input>
                             </el-form-item>
                             <el-form-item label="密码">
-                                <el-input v-model="formLabelAlign.password" placeholder="请输入密码" type='password'></el-input>
+                                <el-input v-model="teacher.password" placeholder="请输入密码" type='password'></el-input>
                             </el-form-item>
                             <div class="submit">
-                                <el-button type="primary" class="row-login" @click="login()">登录</el-button>
+                                <el-button type="primary" class="row-login" @click="handleLogin">登录</el-button>
                             </div>
                             <div class="options">
                                 <p class="find"><a href="javascript:;">找回密码</a></p>
@@ -31,17 +31,7 @@
                 </div>
             </el-col>
         </el-row>
-        <!--        <el-row class="footer">-->
-        <!--            <el-col>-->
-        <!--                <p class="msg2"> 【版权所有 ©2022 <a href="https://blog.csdn.net/qq_43378689">瓜月二十三</a> 保留所有权利】</p>-->
-        <!--            </el-col>-->
-        <!--        </el-row>-->
-        <!--        <section class="remind">-->
-        <!--            <span>管理员账号：10001</span>-->
-        <!--            <span>教师账号：2017001</span>-->
-        <!--            <span>测试学生账号：2017113210</span>-->
-        <!--            <span>密码都是：123456</span>-->
-        <!--        </section>-->
+
     </div>
 </template>
 
@@ -52,12 +42,43 @@
             return {
                 role: 2,
                 labelPosition: 'left',
-                formLabelAlign: {
-                    username: '2017113210',
-                    password: '123456'
+                teacher: {
+                    username: '',
+                    password: ''
+                },
+                rules: {
+                    username: [
+                        { require:true,message:"用户名不能为空", trigger: 'blur' }
+                    ],
+                    password: [
+                        { require:true,message:"密码不能为空", trigger: 'blur' }
+                    ],
                 }
             }
         },
+        methods: {
+            handleLogin() {
+                this.$refs.loginForm.validate((valid) => {
+                    if (valid) {
+                        this.$axios.post("manage/login",this.teacher).then(res=>{
+                            if(res.data.code==10001){
+                                this.$message.error("用户名或密码错误");
+                            }else {
+                                //获得token和teacher对象，保存在sessionStorage或localStorage中
+                                window.localStorage.setItem("teacher",JSON.stringify(res.data.teacher));//json对象转成字符串
+                                window.localStorage.setItem("token",res.data.token);
+                                this.$router.push({path:"/admin"});
+                            }
+                        })
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            resetForm() {
+                this.$refs.loginForm.resetFields();
+            }
+        }
     }
 </script>
 

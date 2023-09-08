@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from "@/views/login";
 import teacherroutes from "./teacher"
+import knowledgeBulletRouters from "./knowledgeBullet";
 import questionTypeRouters from './questionType'
 import levelsroutes from "./levels"
 import subjectroutes from "./subject"
@@ -35,6 +36,7 @@ const routes = [
     path: '/student/register',
     component: () => import('../views/student/register')
   },
+  knowledgeBulletRouters
 
 
 ]

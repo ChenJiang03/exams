@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import login from "@/views/login";
 import teacherroutes from "./teacher"
 import questionTypeRouters from './questionType'
-
 import levelsroutes from "./levels"
+import subjectroutes from "./subject"
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,6 +26,7 @@ const routes = [
     teacherroutes,
     questionTypeRouters,
     levelsroutes,
+    subjectroutes,
   {
     path: '/student/index',
     component: () => import('../views/student/index')

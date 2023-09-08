@@ -6,7 +6,7 @@ import store from './store'
 import './plugins/element.js'
 
 Vue.config.productionTip = false
-
+Vue.prototype.$baseURL="http://localhost:8081/"
 new Vue({
   router,
   store,

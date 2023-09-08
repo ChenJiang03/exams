@@ -4,16 +4,23 @@ package com.wanmait.exam;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.wanmait.exam.inerceptor.JWTInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.annotation.Resource;
 
 @Configuration
 @MapperScan("com.wanmait.exam.mapper")
 public class MybatisConfig implements WebMvcConfigurer {
+
+    @Resource
+    private JWTInterceptor jwtInterceptor;
     //mybatis-plus的分页插件
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
@@ -43,5 +50,10 @@ public class MybatisConfig implements WebMvcConfigurer {
                 //.allowCredentials(true) 如果设为true 可以传送cookie信息，session也就能用，客户端要配合设置xhr.withCredentials=true
                 //预检请求缓存时间
                 .maxAge(60*60*2);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/manage/**").excludePathPatterns("/manage/login");
     }
 }

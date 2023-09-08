@@ -1,13 +1,13 @@
 <template>
 
     <div>
-        <h1>修改教师</h1>
+        <h2>修改教师</h2>
     <el-form :model="teacher" :rules="rules" ref="teacherForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
-            <el-input v-model="teacher.username"></el-input>
+            <el-input v-model="teacher.username" style="width: 800px"></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
-            <el-input v-model="teacher.name" placeholder="请输入姓名"></el-input>
+            <el-input v-model="teacher.name" placeholder="请输入姓名" style="width: 800px"></el-input>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
             <el-radio-group v-model="teacher.sex">
@@ -54,14 +54,14 @@
         },
         methods: {
             getTeacher(id){
-                this.$axios.get("http://localhost:8081/manage/teacher/select?id="+id).then(res=>{
+                this.$axios.get("manage/teacher/select?id="+id).then(res=>{
                     this.teacher=res.data.data;
                 })
             },
             submitForm() {
                 this.$refs.teacherForm.validate((valid) => {
                     if (valid) {
-                        this.$axios.post("http://localhost:8081/manage/teacher/update",this.teacher).then(res=>{
+                        this.$axios.post("manage/teacher/update",this.teacher).then(res=>{
                                 this.$router.push("/admin/teacher/list");
                             }
                         )
@@ -78,5 +78,7 @@
 </script>
 
 <style scoped>
-
+    *{
+        text-align: center;
+    }
 </style>

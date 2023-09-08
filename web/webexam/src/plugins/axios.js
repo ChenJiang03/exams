@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 import axios from "axios";
-
+import router from '../router'
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -20,6 +20,10 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
+    let token=window.localStorage.getItem("token");
+    if(token){
+      config.headers["token"]=token;
+    }
     return config;
   },
   function(error) {
@@ -32,6 +36,10 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
+    if(response.data.code==10002){
+      router.push("/admin/login");
+      //window.location.href("/admin/login")这种不用在上面导入router
+    }
     return response;
   },
   function(error) {

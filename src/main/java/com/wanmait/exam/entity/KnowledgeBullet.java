@@ -1,12 +1,11 @@
 package com.wanmait.exam.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -19,6 +18,7 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
+@ToString
 @Accessors(chain = true)
 @TableName("knowledge_bullet")
 public class KnowledgeBullet {
@@ -29,6 +29,10 @@ public class KnowledgeBullet {
     private String knowledgePoint;
 
     private Integer subjectId;
+
+    //代表这个属性不是数据库里的列
+    @TableField(exist = false)
+    private Subject subject;
 
     private Date updateTime;
 

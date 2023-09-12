@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.wanmait.exam.entity.KnowledgeBullet;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 知识点表 服务类
@@ -18,4 +20,5 @@ public interface KnowledgeBulletService extends IService<KnowledgeBullet> {
 
     void deleteById(Integer id);
 
+    List<KnowledgeBullet> findAllById(Integer id);
 }

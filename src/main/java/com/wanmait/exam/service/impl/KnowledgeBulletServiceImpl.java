@@ -1,9 +1,12 @@
 package com.wanmait.exam.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wanmait.exam.entity.KnowledgeBullet;
+import com.wanmait.exam.entity.Question;
+import com.wanmait.exam.entity.Subject;
 import com.wanmait.exam.mapper.KnowledgeBulletMapper;
 import com.wanmait.exam.service.KnowledgeBulletService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -59,5 +62,11 @@ public class KnowledgeBulletServiceImpl extends ServiceImpl<KnowledgeBulletMappe
         queryWrapper.eq(KnowledgeBullet::getId, id);
         knowledgeBulletMapper.delete(queryWrapper);
     }
+
+    @Override
+    public List<KnowledgeBullet> findAllById(Integer id) {
+        return knowledgeBulletMapper.findAllById(id);
+    }
+
 
 }

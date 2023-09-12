@@ -9,17 +9,44 @@
         <result column="level_id" property="levelId" />
         <result column="subject_id" property="subjectId" />
         <result column="question_type_id" property="questionTypeId" />
-        <result column="knowledge_bullet_id" property="knowledgeBulletId" />
         <result column="input_time" property="inputTime" />
         <result column="teacher_id" property="teacherId" />
         <result column="use_count" property="useCount" />
         <result column="update_time" property="updateTime" />
         <result column="enable" property="enable" />
+        <association property="questionType" javaType="com.wanmait.exam.entity.QuestionType" autoMapping="true">
+            <id column="question_type_id" property="id"></id>
+        </association>
+        <association property="levels" javaType="com.wanmait.exam.entity.Levels" autoMapping="true">
+            <id column="level_id" property="id"></id>
+        </association>
+        <association property="subject" javaType="com.wanmait.exam.entity.Subject" autoMapping="true">
+            <id column="subject_id" property="id"></id>
+            <result column="sub_title" property="title"></result>
+        </association>
+        <association property="teacher" javaType="com.wanmait.exam.entity.Teacher" autoMapping="true">
+            <id column="teacher_id" property="id"></id>
+        </association>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, title, level_id, subject_id, question_type_id, knowledge_bullet_id, input_time, teacher_id, use_count, update_time, enable
+        id, title, level_id, subject_id, question_type_id,input_time, teacher_id, use_count, update_time, enable
     </sql>
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into question(title,level_id,subject_id,question_type_id,teacher_id) values (#{title},#{levels.id},#{subject.id},#{questionType.id},#{teacher.id})
+    </insert>
+    <select id="findAll" resultMap="BaseResultMap">
+        select q.id,q.title,q.level_id,q.subject_id,q.question_type_id,q.input_time,q.teacher_id,q.use_count,q.update_time,l.level,qt.type,t.name,s.title sub_title
+        from question q,levels l,subject s,teacher t,question_type qt
+        where q.level_id=l.id and q.subject_id=s.id and q.question_type_id=qt.id and q.teacher_id=t.id and q.enable=1
+        order by q.question_type_id
+    </select>
+    <select id="findById" resultMap="BaseResultMap">
+        select q.id,q.title,q.level_id,q.subject_id,q.question_type_id,q.input_time,q.teacher_id,q.use_count,q.update_time,l.level,qt.type,t.name,s.title sub_title
+        from question q,levels l,subject s,teacher t,question_type qt
+        where q.level_id=l.id and q.subject_id=s.id and q.question_type_id=qt.id and q.teacher_id=t.id and q.enable=1 and q.id=#{arg0}
+    </select>
+
 
 </mapper>

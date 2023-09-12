@@ -12,5 +12,11 @@
     <sql id="Base_Column_List">
         question_id, knowledge_id
     </sql>
+    <select id="findById" resultMap="BaseResultMap">
+        SELECT knowledge_question.question_id,knowledge_question.knowledge_id
+        FROM knowledge_question,question
+        WHERE knowledge_question.question_id = question.id and knowledge_question.question_id = #{arg0}
+    </select>
+
 
 </mapper>

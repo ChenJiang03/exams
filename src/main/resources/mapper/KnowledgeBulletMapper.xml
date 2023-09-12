@@ -26,5 +26,11 @@
         where knowledge_bullet.enable = 1 and subject.enable = 1
         order by knowledge_bullet.id asc
     </select>
+    <select id="findAllById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />, subject.id, subject.title subject_title, subject.enable from knowledge_bullet
+        left join subject on knowledge_bullet.subject_id = subject.id
+        where knowledge_bullet.enable = 1 and subject.enable = 1 and knowledge_bullet.subject_id = #{arg0}
+
+    </select>
 
 </mapper>

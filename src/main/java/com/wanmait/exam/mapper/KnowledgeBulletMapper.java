@@ -16,4 +16,5 @@ import java.util.List;
 public interface KnowledgeBulletMapper extends BaseMapper<KnowledgeBullet> {
 
     List<KnowledgeBullet> selectList();
+    List<KnowledgeBullet> findAllById(Integer id);
 }

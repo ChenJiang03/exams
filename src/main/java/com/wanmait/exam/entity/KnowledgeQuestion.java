@@ -1,6 +1,8 @@
 package com.wanmait.exam.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -13,8 +15,7 @@ import lombok.experimental.Accessors;
  * @author wanmait
  * @since 2023-08-29
  */
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 @TableName("knowledge_question")
 public class KnowledgeQuestion {
@@ -22,4 +23,10 @@ public class KnowledgeQuestion {
     private Integer questionId;
 
     private Integer knowledgeId;
+
+    @TableField(exist = false)
+    private Question question;
+
+    @TableField(exist = false)
+    private KnowledgeBullet knowledgeBullet;
 }

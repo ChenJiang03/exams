@@ -4,6 +4,8 @@ import login from "@/views/login";
 import teacherroutes from "./teacher"
 import knowledgeBulletRouters from "./knowledgeBullet";
 import questionTypeRouters from './questionType'
+import questionRouter from './question'
+
 import levelsroutes from "./levels"
 import subjectroutes from "./subject"
 
@@ -27,6 +29,7 @@ const routes = [
     teacherroutes,
     questionTypeRouters,
     levelsroutes,
+    questionRouter,
     subjectroutes,
   {
     path: '/student/index',

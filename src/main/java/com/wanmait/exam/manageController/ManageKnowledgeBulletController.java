@@ -1,5 +1,6 @@
 package com.wanmait.exam.manageController;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanmait.exam.entity.KnowledgeBullet;
 import com.wanmait.exam.service.KnowledgeBulletService;
 import com.wanmait.exam.util.AjaxResult;
@@ -82,5 +83,15 @@ public class ManageKnowledgeBulletController
         knowledgeBullet.setUpdateTime(date);
         knowledgeBulletService.updateById(knowledgeBullet);
         return AjaxResult.success("修改成功");
+    }
+
+    @GetMapping("findAllById")
+    public AjaxResult findAllById(Integer id){
+        return AjaxResult.success(knowledgeBulletService.findAllById(id));
+    }
+
+    @GetMapping("findAll")
+    public AjaxResult findAll(){
+        return AjaxResult.success(knowledgeBulletService.list());
     }
 }

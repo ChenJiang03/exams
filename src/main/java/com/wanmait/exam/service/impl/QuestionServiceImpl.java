@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,5 +42,14 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     @Override
     public Question findById(Integer id) {
         return questionMapper.findById(id);
+    }
+
+    @Override
+    public PageInfo<Question> search(Question question, Integer knowledge, Date startTime, Date endTime,Integer pageNum) {
+        int pageSize = 5;
+        PageHelper.startPage(pageNum,pageSize);
+        List<Question> questionList = questionMapper.search(question, knowledge, startTime, endTime);
+        PageInfo<Question> questionPageInfo = new PageInfo<>(questionList,3);
+        return questionPageInfo;
     }
 }

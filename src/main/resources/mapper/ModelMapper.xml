@@ -14,8 +14,15 @@
     <sql id="Base_Column_List">
         id, title, description, enable
     </sql>
-<!--    <select id="selectList" resultType="java.lang.String">-->
-<!--        select <include refid="Base_Column_List"></include>,paper_model.-->
-<!--    </select>-->
+    <select id="selectList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from model where model.enable=1
+    </select>
+    <select id="findById" resultMap="BaseResultMap">
+        select model.id, model.title, model.description,paper_model.question_count,question_type.type
+        from model
+                 left join paper_model on paper_model.model_id=model.id
+                 left join question_type on paper_model.question_type_id=question_type.id
+        where model.id=#{id} and model.enable=1 and question_type.enable=1
+    </select>
 
 </mapper>

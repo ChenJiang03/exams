@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -80,5 +83,13 @@ public class ManageQuestionController {
             knowledgeQuestionService.save(knowledgeQuestion);
         }
         return AjaxResult.success("更新");
+    }
+
+    @PostMapping("search")
+    public AjaxResult search(@RequestBody Question question,Integer knowledge,Date startTime,Date endTime,Integer pageNum){
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        return AjaxResult.success(questionService.search(question, knowledge, startTime, endTime,pageNum));
     }
 }

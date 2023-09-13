@@ -33,6 +33,10 @@
     <sql id="Base_Column_List">
         id, title, level_id, subject_id, question_type_id,input_time, teacher_id, use_count, update_time, enable
     </sql>
+    <sql id="Question_Column_list">
+            question.id,question.title,question.level_id,question.subject_id,question.question_type_id,question.input_time,
+            question.teacher_id,question.update_time
+    </sql>
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into question(title,level_id,subject_id,question_type_id,teacher_id) values (#{title},#{levels.id},#{subject.id},#{questionType.id},#{teacher.id})
     </insert>
@@ -46,6 +50,34 @@
         select q.id,q.title,q.level_id,q.subject_id,q.question_type_id,q.input_time,q.teacher_id,q.use_count,q.update_time,l.level,qt.type,t.name,s.title sub_title
         from question q,levels l,subject s,teacher t,question_type qt
         where q.level_id=l.id and q.subject_id=s.id and q.question_type_id=qt.id and q.teacher_id=t.id and q.enable=1 and q.id=#{arg0}
+    </select>
+    <select id="search" resultMap="BaseResultMap">
+        select distinct <include refid="Question_Column_list"/>,levels.level,question_type.type,subject.title sub_title,teacher.name
+        from question left join levels on question.level_id=levels.id left join question_type on question.question_type_id=question_type.id
+        left join subject on question.subject_id=subject.id left join teacher on question.teacher_id=teacher.id
+        left join knowledge_question on question.id=knowledge_question.question_id left join knowledge_bullet on knowledge_question.knowledge_id=knowledge_bullet.id
+        where question.enable=1 and levels.enable=1 and teacher.enable=1 and question_type.enable=1 and subject.enable=1 and knowledge_bullet.enable=1
+        <if test="question.questionTypeId != null">
+            and question.question_type_id=#{question.questionTypeId}
+        </if>
+        <if test="question.subjectId != null">
+            and question.subject_id=#{question.subjectId}
+        </if>
+        <if test="question.levelId != null">
+            and question.level_id=#{question_levelId}
+        </if>
+        <if test="question.title != null and question.title != ''">
+            and question.title like concat('%',#{question.title},'%')
+        </if>
+        <if test="knowledge != null">
+            and knowledge_bullet.id=#{knowledge}
+        </if>
+        <if test="startTime != null">
+            and question.input_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and question.input_time &lt;= #{endTime}
+        </if>
     </select>
 
 

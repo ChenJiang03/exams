@@ -5,6 +5,10 @@ import com.wanmait.exam.mapper.QuestionTypeMapper;
 import com.wanmait.exam.service.QuestionTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -15,6 +19,13 @@ import org.springframework.stereotype.Service;
  * @since 2023-08-29
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class QuestionTypeServiceImpl extends ServiceImpl<QuestionTypeMapper, QuestionType> implements QuestionTypeService {
 
+    @Resource
+    private QuestionTypeMapper questionTypeMapper;
+    @Override
+    public List<QuestionType> getTypes() {
+        return questionTypeMapper.getTypes();
+    }
 }

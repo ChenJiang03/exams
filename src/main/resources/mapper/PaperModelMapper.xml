@@ -8,11 +8,38 @@
         <result column="question_type_id" property="questionTypeId" />
         <result column="question_count" property="questionCount" />
         <result column="model_id" property="modelId" />
+        <association property="model" javaType="com.wanmait.exam.entity.Model" autoMapping="true">
+            <id column="model_id" property="id"></id>
+            <result column="title" property="title"></result>
+            <result column="description" property="description"></result>
+        </association>
+        <association property="questionType" javaType="com.wanmait.exam.entity.QuestionType" autoMapping="true">
+            <id column="question_type_id" property="id"></id>
+            <result column="type" property="type"></result>
+            <result column="is_subjective" property="isSubjective"></result>
+        </association>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, question_type_id, question_count, model_id
     </sql>
+    <select id="findByModelId" resultMap="BaseResultMap">
+        select model.id as model_id, model.title, model.description,paper_model.id,paper_model.question_count,question_type.type
+        from model
+        left join paper_model on paper_model.model_id=model.id
+        left join question_type on paper_model.question_type_id=question_type.id
+        where model.enable=1 and question_type.enable=1 and model_id=#{modelId}
+    </select>
+    <select id="findByPaperModelId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from paper_model where paper_model.id=#{paperModelId}
+    </select>
+    <select id="getExistTypes"  resultMap="com.wanmait.exam.mapper.QuestionTypeMapper.BaseResultMap">
+            select question_type.type,question_type.id
+            from model
+                     left join paper_model on paper_model.model_id=model.id
+                     left join question_type on paper_model.question_type_id=question_type.id
+            where model.enable=1 and question_type.enable=1 and model_id=#{modelId}
+    </select>
 
 </mapper>

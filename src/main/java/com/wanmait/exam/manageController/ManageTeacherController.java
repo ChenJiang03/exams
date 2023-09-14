@@ -1,9 +1,9 @@
 package com.wanmait.exam.manageController;
 
 import com.wanmait.exam.entity.Teacher;
+import com.wanmait.exam.service.ConfigService;
 import com.wanmait.exam.service.TeacherService;
 import com.wanmait.exam.util.AjaxResult;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,11 +22,20 @@ import java.util.List;
 public class ManageTeacherController {
     @Resource
     private TeacherService teacherService;
-
+    @Resource
+    private ConfigService configService;
     @GetMapping("list")
-    public AjaxResult selectList(){
-        List<Teacher> teacherList=teacherService.list();
-        return AjaxResult.success(teacherList);
+    public AjaxResult selectList(Integer pageNum){
+        if(pageNum==null){
+            pageNum=1;
+        }
+        int pageSize;
+        try {
+            pageSize=Integer.parseInt(configService.selectConfigValueByConfigKey("teacher_page_size"));
+        } catch (NumberFormatException e) {
+            pageSize=6;
+        }
+        return AjaxResult.success(teacherService.findAll(pageNum,pageSize));
     }
 
     @PostMapping("add")

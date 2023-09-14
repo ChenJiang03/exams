@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-08-29
  */
 public interface ConfigService extends IService<Config> {
-
+    String selectConfigValueByConfigKey(String configKey);
 }

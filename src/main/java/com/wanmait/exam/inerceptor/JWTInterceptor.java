@@ -5,6 +5,7 @@ import com.wanmait.exam.entity.Teacher;
 import com.wanmait.exam.service.TeacherService;
 
 import com.wanmait.exam.util.JWTUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class JWTInterceptor implements HandlerInterceptor {
     @Resource
     private TeacherService teacherService;
+    @Resource
+    private RedisTemplate<String,Object> redisTemplate;
 
     //如果返回true就调用控制器的功能处理方法，如果返回false就不调用，如果前后端不分离一般配合重定向，如果前后端分离，就给客户端返回响应数据
     @Override
@@ -30,16 +33,20 @@ public class JWTInterceptor implements HandlerInterceptor {
             throw new JWTVerificationException("请求没有携带token");
         }
         //获得签发对象,如果解析失败也会走统一的异常处理
-        Integer id=null;
-        try {
-            id=Integer.parseInt(JWTUtils.getAudience(token));
-        } catch (NumberFormatException e) {
-            throw new JWTVerificationException("解析token失败");
-        }
-        //查询出教师
-        Teacher teacher=teacherService.getById(id);
+//        Integer id=null;
+//        try {
+//            id=Integer.parseInt(JWTUtils.getAudience(token));
+//        } catch (NumberFormatException e) {
+//            throw new JWTVerificationException("解析token失败");
+//        }
+//        //查询出教师
+//        Teacher teacher=teacherService.getById(id);
+//        if(teacher==null){
+//            throw new JWTVerificationException("没有查询到教师信息");
+//        }
+        Teacher teacher=(Teacher)redisTemplate.opsForValue().get("token:"+token);
         if(teacher==null){
-            throw new JWTVerificationException("没有查询到教师信息");
+            throw new JWTVerificationException("token无效或者过期");
         }
         //验证token
         JWTUtils.verifyToken(token,teacher.getPassword());

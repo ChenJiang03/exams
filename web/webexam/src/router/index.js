@@ -4,6 +4,7 @@ import login from "@/views/login";
 import teacherroutes from "./teacher"
 import knowledgeBulletRouters from "./knowledgeBullet";
 import questionTypeRouters from './questionType'
+import modelroutes from './model'
 import questionRouter from './question'
 
 import levelsroutes from "./levels"
@@ -31,6 +32,7 @@ const routes = [
     levelsroutes,
     questionRouter,
     subjectroutes,
+    modelroutes,
   {
     path: '/student/index',
     component: () => import('../views/student/index')

@@ -14,5 +14,8 @@
     <sql id="Base_Column_List">
         id, type, is_subjective, enable
     </sql>
+    <select id="getTypes" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from question_type where enable=1
+    </select>
 
 </mapper>

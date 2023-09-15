@@ -30,7 +30,7 @@ public class StudentController {
     @PostMapping("register")
     public AjaxResult register(@RequestBody Student student){
         studentService.save(student);
-        return AjaxResult.success("注册完成");
+        return AjaxResult.success("注册完成！");
     }
 
 }

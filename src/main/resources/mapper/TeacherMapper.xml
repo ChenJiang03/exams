@@ -23,5 +23,8 @@
     <select id="findByUsernameAndPassword" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from teacher where username=#{username} and password=#{password} and enable=1
     </select>
+    <select id="selectList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from teacher where enable=1
+    </select>
 
 </mapper>

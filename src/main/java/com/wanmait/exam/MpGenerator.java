@@ -51,6 +51,7 @@ public class MpGenerator {
                     //builder.addInclude("admin"); // 设置需要生成的表名
                     //builder.addExclude("admin");//除了admin之外其它的都生成
 //                    builder.addInclude("user");
+                    builder.addInclude("student_class");
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

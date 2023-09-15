@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2023-08-29
  */
 @RestController
-@RequestMapping("/levels")
+@RequestMapping("/manage/levels")
 public class LevelsController {
     @Resource
     private LevelsService levelsService;

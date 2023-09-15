@@ -1,7 +1,7 @@
 import index from "@/views/admin/index"
-import LevelsList from "@/views/levels/LevelsList";
-import LevelsAdd from "@/views/levels/LevelsAdd";
-import LevelsUpdate from "@/views/levels/LevelsUpdate";
+import LevelsList from "@/views/admin/levels/LevelsList";
+import LevelsAdd from "@/views/admin/levels/LevelsAdd";
+import LevelsUpdate from "@/views/admin/levels/LevelsUpdate";
 
 const routes=
     {

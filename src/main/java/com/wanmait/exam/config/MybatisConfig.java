@@ -1,4 +1,4 @@
-package com.wanmait.exam;
+package com.wanmait.exam.config;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;

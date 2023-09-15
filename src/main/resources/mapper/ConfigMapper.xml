@@ -15,5 +15,8 @@
     <sql id="Base_Column_List">
         id, config_key, config_value, default_value, description
     </sql>
+    <select id="getConfigValueByConfigKey" resultType="java.lang.String">
+        select config_value from config where config.config_key=#{configKey}
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.wanmait.exam.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
@@ -29,4 +30,10 @@ public class PaperModel {
     private Integer questionCount;
 
     private Integer modelId;
+
+    @TableField(exist = false)
+    private Model model;
+
+    @TableField(exist = false)
+    private QuestionType questionType;
 }

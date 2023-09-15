@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-table
-                :data="teachers"
+                :data="pageInfo.list"
                 style="width: 100%"
                 :router="true"
         >
@@ -17,10 +17,17 @@
             <el-table-column label="操作" >
                 <template slot-scope="scope">
                     <el-button @click="handleToUpdate(scope.row.id)">修改</el-button>
-                    <el-button @click="handleDelete(scope.$index)">删除</el-button>
+                    <el-button @click="handleDelete(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+                @current-change="handleList"
+                background
+                layout="prev, pager, next"
+                :page-size="pageInfo.pageSize"
+                :total="pageInfo.total">
+        </el-pagination>
     </div>
 
 </template>
@@ -30,33 +37,32 @@
         name: "TeacherList",
         data(){
             return {
-                teacher:{},
+                pageInfo:{},
                 teachers:[],
             }
         },
         created() {
-            this.handleList();
+            this.handleList(1);
         },
         methods:{
             handleToUpdate(id){
                 this.$router.push({path:"/admin/teacher/update",query: { id: id }});
             },
-            handleList(){
-                this.$axios.get("manage/teacher/list")
+            handleList(pageNum){
+                this.$axios.get("manage/teacher/list",{params:{pageNum:pageNum}})
                     .then(res=>{
-                        this.teachers = res.data.data;
+                        this.pageInfo = res.data.data;
                     });
             },
-            handleDelete(index){
-                const teacherId = this.teachers[index].id;// 获取要删除教师的ID
+            handleDelete(id){
+                // console.log(id)
                 this.$confirm('此操作将删除该教师, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.teachers.splice(index,1);
-                    this.$axios.post("manage/teacher/delete?id="+teacherId).then(res=>{
-                        this.handleList();
+                    this.$axios.post("manage/teacher/delete?id="+id).then(res=>{
+                        this.handleList(1);
                     })
                 }).catch(() => {
                 });

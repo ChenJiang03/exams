@@ -1,7 +1,6 @@
 import index from "@/views/admin/index"
 import SubjectList from "@/views/subject/SubjectList";
 import SubjectAdd from "@/views/subject/SubjectAdd";
-import SubjectUpdate from "@/views/subject/SubjectUpdate";
 
 const routes=
     {

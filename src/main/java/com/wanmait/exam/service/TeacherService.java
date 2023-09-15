@@ -1,5 +1,6 @@
 package com.wanmait.exam.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wanmait.exam.entity.Teacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TeacherService extends IService<Teacher> {
     Teacher login(Teacher teacher);
+    PageInfo<Teacher> findAll(int pageNum,int pageSize);
 }

@@ -1,5 +1,7 @@
 package com.wanmait.exam.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wanmait.exam.entity.Levels;
 import com.wanmait.exam.mapper.LevelsMapper;
 import com.wanmait.exam.service.LevelsService;
@@ -27,7 +29,15 @@ public class LevelsServiceImpl extends ServiceImpl<LevelsMapper, Levels> impleme
 
     @Override
     public List<Levels> findAll() {
+
         return levelsMapper.findAll();
+    }
+
+    @Override
+    public PageInfo<Levels> findAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Levels> levelsList=levelsMapper.findAll();
+        return new PageInfo<>(levelsList,5);
     }
 
     @Override

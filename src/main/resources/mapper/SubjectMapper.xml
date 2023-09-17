@@ -18,5 +18,8 @@
     <sql id="Base_Column_List">
         id, title, description, sort, start_time, end_time, is_completed, enable
     </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from subject where enable=1
+    </select>
 
 </mapper>

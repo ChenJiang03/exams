@@ -1,6 +1,8 @@
 import index from "@/views/admin/index"
 import SubjectList from "@/views/admin/subject/SubjectList";
 import SubjectAdd from "@/views/admin/subject/SubjectAdd";
+import SubjectUpdate from "@/views/admin/subject/SubjectUpdate";
+
 
 const routes=
     {
@@ -17,6 +19,11 @@ const routes=
                 path: 'add',
                 name: 'subjectAdd',
                 component:SubjectAdd
+            },
+            {
+                path: 'update',
+                name: 'subjectUpdate',
+                component:SubjectUpdate
             }
 
         ]

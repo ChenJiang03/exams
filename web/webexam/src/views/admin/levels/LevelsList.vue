@@ -5,7 +5,7 @@
             <router-link to="/levels/add">添加</router-link>
         </el-col>
         <el-table
-                :data="levels"
+                :data="level.list"
                 style="width: 100%"
                 :router="true"
         >
@@ -19,6 +19,13 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+                @current-change="handleRefreshDate"
+                background
+                layout="prev, pager, next"
+                :page-size="level.pageSize"
+                :total="level.total">
+        </el-pagination>
     </div>
 </template>
 
@@ -32,13 +39,13 @@
             }
         },
         created() {
-            this.handleRefreshDate();
+            this.handleRefreshDate(1);
         },
         methods:{
-            handleRefreshDate(){
-                this.$axios.get("levels/list")
+            handleRefreshDate(pageNum){
+                this.$axios.get("levels/list",{params:{pageNum:pageNum}})
                     .then(res=>{
-                        this.levels = res.data.data;
+                        this.level = res.data.data;
                     });
             },
             handleToUpdate(id){

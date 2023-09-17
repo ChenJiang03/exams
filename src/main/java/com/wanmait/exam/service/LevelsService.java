@@ -1,5 +1,6 @@
 package com.wanmait.exam.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wanmait.exam.entity.Levels;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public interface LevelsService extends IService<Levels> {
 
     List<Levels> findAll();
+
+    PageInfo<Levels> findAll(int pageNum,int pageSize);
 
     void add(Levels levels);
 

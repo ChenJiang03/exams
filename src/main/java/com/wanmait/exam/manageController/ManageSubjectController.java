@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,13 @@ public class ManageSubjectController {
     SubjectService subjectService;
 
     @GetMapping("list")
-    public AjaxResult subjectList(){
-        List<Subject> subjectList=subjectService.list();
-        return AjaxResult.success(subjectList);
+    public AjaxResult subjectList(Integer pageNum){
+        if(pageNum==null){
+            pageNum=1;
+        }
+        int pageSize=3;
+
+        return AjaxResult.success(subjectService.findAll(pageNum,pageSize));
     }
 
     @GetMapping("update")
@@ -30,8 +35,17 @@ public class ManageSubjectController {
 
     @PostMapping("update")
     public AjaxResult update(@RequestBody Subject subject){
-        subjectService.updateById(subject);
-        return AjaxResult.success("修改完成");
+        if(subject.getIsCompleted().equals(false)){
+            subject.setEndTime(null);
+            subjectService.updateById(subject);
+            return AjaxResult.success("修改完成");
+        }
+        else{
+            subject.setEndTime(new Date());
+            subjectService.updateById(subject);
+            return AjaxResult.success("修改完成");
+        }
+
     }
 
     @PostMapping("delete")

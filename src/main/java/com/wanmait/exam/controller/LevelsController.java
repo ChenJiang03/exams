@@ -24,9 +24,13 @@ public class LevelsController {
     private LevelsService levelsService;
 
     @GetMapping("list")
-    public AjaxResult list(){
-        List<Levels> levelsList=levelsService.findAll();
-        return AjaxResult.success(levelsList);
+    public AjaxResult list(Integer pageNum){
+        if(pageNum==null){
+            pageNum=1;
+        }
+        int pageSize=3;
+
+        return AjaxResult.success(levelsService.findAll(pageNum,pageSize));
     }
 
     @PostMapping("add")
